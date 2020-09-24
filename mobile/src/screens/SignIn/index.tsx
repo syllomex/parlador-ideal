@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { color } from "../../assets/color";
 
-const Home: React.FC = () => {
+const SignIn: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text>
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default SignIn;

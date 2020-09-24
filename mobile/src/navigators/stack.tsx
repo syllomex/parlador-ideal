@@ -1,15 +1,15 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
-import Home from "../screens/Home";
+import SignIn from "../screens/SignIn";
 
 const Stack = createStackNavigator();
 
 export const StackNavigator: React.FC = () => {
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator initialRouteName="SignIn">
       <Stack.Screen
-        name="Home"
-        component={Home}
+        name="SignIn"
+        component={SignIn}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
