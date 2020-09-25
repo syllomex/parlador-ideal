@@ -8,5 +8,6 @@ mobile/*.key
 mobile/*.mobileprovision
 mobile/*.orig.*
 mobile/web-build/
+mobile/yarn-error.log
 
 mobile/.DS_Store
