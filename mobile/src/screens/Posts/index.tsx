@@ -69,7 +69,7 @@ const Posts: React.FC = () => {
           <IconButton onPress={handlePressLogout}>
             <SignOutIcon />
           </IconButton>
-          <IconButton>
+          <IconButton onPress={() => navigate("NewPost")}>
             <NewPostIcon />
           </IconButton>
         </IconsContainer>
