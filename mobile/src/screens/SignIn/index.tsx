@@ -41,7 +41,7 @@ const SignIn: React.FC = () => {
 
       <ActionsContainer>
         <Link onPress={() => navigate("SignUp")}>Cadastrar-se</Link>
-        <Button>Entrar</Button>
+        <Button onPress={() => navigate("Posts")}>Entrar</Button>
       </ActionsContainer>
 
       <Image source={logo_large} />
