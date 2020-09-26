@@ -1,6 +1,5 @@
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import React, { useCallback, useState } from "react";
-import { ScrollView } from "react-native-gesture-handler";
 
 import PostCard from "../../components/PostCard";
 import Title from "../../components/Title";
@@ -85,6 +84,7 @@ const Posts: React.FC = () => {
         {posts.map((post: any) => (
           <PostCard
             key={post.id}
+            id={post.id}
             name={post.name}
             content={post.content}
             date={post.date}

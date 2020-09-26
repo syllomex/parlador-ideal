@@ -5,19 +5,20 @@ import { Container, Content, Date, Name, TouchableContainer } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 
 interface IProps {
+  id: string;
   name: string;
   isOwner: boolean;
   content: string;
   date: Date;
 }
 
-const PostCard: React.FC<IProps> = ({ name, isOwner, content, date }) => {
+const PostCard: React.FC<IProps> = ({ id, name, isOwner, content, date }) => {
   const { navigate } = useNavigation();
 
   let dateStr = moment(date).locale("pt-br").format("LLL");
 
   function handlePress() {
-    if (isOwner) navigate("EditPost", { name, content });
+    if (isOwner) navigate("EditPost", { id, name, content });
   }
 
   if (isOwner)
