@@ -1,26 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
+import { Image } from "react-native";
+import Button from "../../components/Button";
+import InputBlock from "../../components/InputBlock";
+import Link from "../../components/Link";
+import TitleRight from "../../components/TitleRight";
 
-import { StyleSheet, Text, View } from "react-native";
-import { color } from "../../assets/color";
+import { ActionsContainer } from "./styles";
+
+import logo_large from "../../assets/images/icons/logo_large.png";
+import Wrapper from "../../components/Wrapper";
 
 const SignIn: React.FC = () => {
+  const [fields, setFields] = useState({
+    email: "",
+    password: "",
+  });
+
   return (
-    <View style={styles.container}>
-      <Text>
-        Bem-vindo ao{" "}
-        <Text style={{ color: color.primary }}>Parlador Ideal</Text>
-      </Text>
-    </View>
+    <Wrapper>
+      <TitleRight />
+
+      <InputBlock
+        label="E-mail"
+        fieldName="email"
+        state={fields}
+        setState={setFields}
+        input={{ autoFocus: true, textContentType: "emailAddress" }}
+      />
+      <InputBlock
+        label="Senha"
+        fieldName="password"
+        state={fields}
+        setState={setFields}
+        input={{ textContentType: "password", secureTextEntry: true }}
+      />
+
+      <ActionsContainer>
+        <Link>Cadastrar-se</Link>
+        <Button>Entrar</Button>
+      </ActionsContainer>
+
+      <Image source={logo_large} />
+    </Wrapper>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 
 export default SignIn;
