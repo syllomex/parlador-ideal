@@ -4,6 +4,7 @@ import Button from "../../components/Button";
 import EditablePostCard from "../../components/EditablePostCard";
 import Link from "../../components/Link";
 import Title from "../../components/Title";
+import Wrapper from "../../components/Wrapper";
 
 import { ActionsContainer, Container, TitleContainer } from "./styles";
 
@@ -13,24 +14,26 @@ const NewPost: React.FC = () => {
   const [content, setContent] = useState("");
 
   useEffect(() => {
-    console.log(content);
+    // TODO: send content to API
   }, [content]);
 
   return (
-    <Container>
-      <TitleContainer>
-        <Title withIcon iconSize="medium" navigateTo="Posts">
-          Publicar
-        </Title>
-      </TitleContainer>
+    <Wrapper>
+      <Container>
+        <TitleContainer>
+          <Title withIcon iconSize="medium" navigateTo="Posts">
+            Publicar
+          </Title>
+        </TitleContainer>
 
-      <EditablePostCard name="Leonardo Santos" onChangeContent={setContent} />
+        <EditablePostCard name="Leonardo Santos" onChangeContent={setContent} />
 
-      <ActionsContainer>
-        <Button>Publicar</Button>
-        <Link onPress={() => navigate("Posts")}>Voltar</Link>
-      </ActionsContainer>
-    </Container>
+        <ActionsContainer>
+          <Button>Publicar</Button>
+          <Link onPress={() => navigate("Posts")}>Voltar</Link>
+        </ActionsContainer>
+      </Container>
+    </Wrapper>
   );
 };
 

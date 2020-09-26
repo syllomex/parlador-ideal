@@ -1,5 +1,5 @@
 import React from "react";
-import { ScrollViewProps, StyleSheet } from "react-native";
+import { ScrollViewProps, StyleSheet, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { color } from "../../assets/color";
 
@@ -11,19 +11,24 @@ const Wrapper: React.FC<IProps> = ({ fixedHeader, children }) => {
   return (
     <React.Fragment>
       {fixedHeader && fixedHeader}
-      <ScrollView contentContainerStyle={styles.scrollView}>
-        {children}
-      </ScrollView>
+      <View style={styles.view}>
+        <ScrollView contentContainerStyle={styles.scrollView}>
+          {children}
+        </ScrollView>
+      </View>
     </React.Fragment>
   );
 };
 
 const styles = StyleSheet.create({
+  view: {
+    flex: 1,
+    backgroundColor: color.background,
+  },
   scrollView: {
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: color.background,
-    minHeight: "100%",
     paddingHorizontal: "10%",
   },
 });

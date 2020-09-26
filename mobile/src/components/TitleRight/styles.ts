@@ -3,7 +3,7 @@ import { color } from "../../assets/color";
 
 export const Container = styled.View`
   width: 100%;
-  margin-bottom: 32px;
+  margin: 32px 0;
 `;
 
 export const TopLine = styled.Text`

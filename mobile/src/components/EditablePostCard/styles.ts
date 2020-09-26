@@ -12,7 +12,7 @@ export const Container = styled.View`
 
 export const Content = styled.TextInput`
   font-family: "Inter_400Regular";
-  max-height: 52px;
+  max-height: 200px;
 `;
 
 export const Name = styled.Text`
@@ -28,5 +28,6 @@ export const CharacterCounter = styled.Text`
   font-size: 14px;
   font-family: "Inter_400Regular";
 
+  padding-top: 8px;
   align-self: flex-end;
 `;

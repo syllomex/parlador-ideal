@@ -3,8 +3,10 @@ import { color } from "../../assets/color";
 
 export const Container = styled.View`
   flex: 1;
-  padding: 52px 10%;
+  padding: 52px 0;
   justify-content: space-between;
+
+  width: 100%;
 
   background-color: ${color.background};
 `;
