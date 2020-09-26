@@ -11,9 +11,15 @@ export const Text = styled.Text`
 
 export const Container = styled.View`
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
+`;
+
+export const IconsContainer = styled.View`
+  flex-direction: row;
 `;
 
 export const Icon = styled.Image.attrs({ source: logo_small })`
-  margin-right: 4px;
+  margin-right: 8px;
+  width: 32px;
+  height: 32px;
 `;
