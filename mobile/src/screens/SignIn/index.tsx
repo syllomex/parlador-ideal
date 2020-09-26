@@ -28,7 +28,11 @@ const SignIn: React.FC = () => {
         fieldName="email"
         state={fields}
         setState={setFields}
-        input={{ autoFocus: true, textContentType: "emailAddress" }}
+        input={{
+          autoFocus: true,
+          textContentType: "emailAddress",
+          keyboardType: "email-address",
+        }}
       />
 
       <InputBlock
