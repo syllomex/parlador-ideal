@@ -1,7 +1,8 @@
 import React from "react";
 import moment from "moment";
 
-import { Container, Content, Date, Name } from "./styles";
+import { Container, Content, Date, Name, TouchableContainer } from "./styles";
+import { useNavigation } from "@react-navigation/native";
 
 interface IProps {
   name: string;
@@ -11,10 +12,25 @@ interface IProps {
 }
 
 const PostCard: React.FC<IProps> = ({ name, isOwner, content, date }) => {
+  const { navigate } = useNavigation();
+
   let dateStr = moment(date).locale("pt-br").format("LLL");
 
+  function handlePress() {
+    if (isOwner) navigate("EditPost", { name, content });
+  }
+
+  if (isOwner)
+    return (
+      <TouchableContainer onPress={handlePress}>
+        <Name>{name}</Name>
+        <Content>{content}</Content>
+        <Date>{dateStr}</Date>
+      </TouchableContainer>
+    );
+
   return (
-    <Container isOwner={isOwner}>
+    <Container>
       <Name>{name}</Name>
       <Content>{content}</Content>
       <Date>{dateStr}</Date>

@@ -1,10 +1,18 @@
+import { TouchableOpacityProps } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { color } from "../../assets/color";
 
-export const Container = styled(TouchableOpacity)<{ isOwner: boolean }>`
-  background-color: ${(props) =>
-    props.isOwner ? color.primary : color.gray_background};
+export const TouchableContainer = styled(TouchableOpacity)<TouchableOpacityProps>`
+  background-color: ${color.primary};
+
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 24px;
+`;
+
+export const Container = styled.View`
+  background-color: ${color.gray_background};
 
   border-radius: 14px;
   padding: 20px;
