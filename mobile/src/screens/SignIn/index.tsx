@@ -30,6 +30,7 @@ const SignIn: React.FC = () => {
         setState={setFields}
         input={{ autoFocus: true, textContentType: "emailAddress" }}
       />
+
       <InputBlock
         label="Senha"
         fieldName="password"
