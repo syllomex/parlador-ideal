@@ -1,35 +1,44 @@
 import React, { useState } from "react";
-import { Image } from "react-native";
 import Button from "../../components/Button";
 import InputBlock from "../../components/InputBlock";
 import Link from "../../components/Link";
+import Title from "../../components/Title";
 import TitleRight from "../../components/TitleRight";
+import Wrapper from "../../components/Wrapper";
 
 import { ActionsContainer } from "./styles";
 
-import logo_large from "../../assets/images/icons/logo_large.png";
-import Wrapper from "../../components/Wrapper";
-import { useNavigation } from "@react-navigation/native";
-
-const SignIn: React.FC = () => {
+const SignUp: React.FC = () => {
   const [fields, setFields] = useState({
+    name: "",
     email: "",
     password: "",
+    password_confirm: "",
   });
-
-  const { navigate } = useNavigation();
 
   return (
     <Wrapper>
       <TitleRight />
+
+      <Title style={{ alignSelf: "flex-start", marginBottom: 28 }}>
+        Criar conta
+      </Title>
+
+      <InputBlock
+        label="Nome completo"
+        fieldName="name"
+        state={fields}
+        setState={setFields}
+      />
 
       <InputBlock
         label="E-mail"
         fieldName="email"
         state={fields}
         setState={setFields}
-        input={{ autoFocus: true, textContentType: "emailAddress" }}
+        input={{ textContentType: "emailAddress" }}
       />
+
       <InputBlock
         label="Senha"
         fieldName="password"
@@ -38,14 +47,20 @@ const SignIn: React.FC = () => {
         input={{ textContentType: "password", secureTextEntry: true }}
       />
 
-      <ActionsContainer>
-        <Link onPress={() => navigate("SignUp")}>Cadastrar-se</Link>
-        <Button>Entrar</Button>
-      </ActionsContainer>
+      <InputBlock
+        label="Confirmar senha"
+        fieldName="password_confirm"
+        state={fields}
+        setState={setFields}
+        input={{ textContentType: "password", secureTextEntry: true }}
+      />
 
-      <Image source={logo_large} />
+      <ActionsContainer>
+        <Link>Já tenho uma conta</Link>
+        <Button>Criar conta</Button>
+      </ActionsContainer>
     </Wrapper>
   );
 };
 
-export default SignIn;
+export default SignUp;
