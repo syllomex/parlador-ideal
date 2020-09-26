@@ -2,6 +2,7 @@ import styled from "styled-components/native";
 import { color } from "../../assets/color";
 
 import logo_small from "../../assets/images/icons/logo_small.png";
+import logo_medium from "../../assets/images/icons/logo_medium.png";
 
 export const Text = styled.Text`
   font-family: "Inter_400Regular";
@@ -18,8 +19,14 @@ export const IconsContainer = styled.View`
   flex-direction: row;
 `;
 
-export const Icon = styled.Image.attrs({ source: logo_small })`
+export const IconSmall = styled.Image.attrs({ source: logo_small })`
   margin-right: 8px;
   width: 32px;
   height: 32px;
+`;
+
+export const IconMedium = styled.Image.attrs({ source: logo_medium })`
+  margin-right: 8px;
+  width: 48px;
+  height: 48px;
 `;
