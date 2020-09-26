@@ -1,5 +1,6 @@
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import React, { useCallback, useState } from "react";
+import { ScrollView } from "react-native-gesture-handler";
 
 import PostCard from "../../components/PostCard";
 import Title from "../../components/Title";
@@ -9,7 +10,7 @@ import Wrapper from "../../components/Wrapper";
 import { logoutHandler } from "../../handlers/logout";
 
 import {
-  Header,
+  Header as StyledHeader,
   IconButton,
   NewPostIcon,
   SignOutIcon,
@@ -60,9 +61,9 @@ const Posts: React.FC = () => {
     }, [])
   );
 
-  return (
-    <Wrapper>
-      <Header>
+  const Header: React.FC = () => {
+    return (
+      <StyledHeader>
         <Title withIcon>Publicações</Title>
         <IconsContainer>
           <IconButton onPress={handlePressLogout}>
@@ -72,8 +73,12 @@ const Posts: React.FC = () => {
             <NewPostIcon />
           </IconButton>
         </IconsContainer>
-      </Header>
+      </StyledHeader>
+    );
+  };
 
+  return (
+    <Wrapper fixedHeader={<Header />}>
       <PostsContainer>
         {posts.map((post: any) => (
           <PostCard
