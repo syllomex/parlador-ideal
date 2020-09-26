@@ -6,7 +6,7 @@ import Title from "../../components/Title";
 import TitleRight from "../../components/TitleRight";
 import Wrapper from "../../components/Wrapper";
 
-import { ActionsContainer } from "./styles";
+import { ActionsContainer, TitleContainer } from "./styles";
 
 const SignUp: React.FC = () => {
   const [fields, setFields] = useState({
@@ -20,15 +20,16 @@ const SignUp: React.FC = () => {
     <Wrapper>
       <TitleRight />
 
-      <Title style={{ alignSelf: "flex-start", marginBottom: 28 }}>
-        Criar conta
-      </Title>
+      <TitleContainer>
+        <Title>Criar conta</Title>
+      </TitleContainer>
 
       <InputBlock
         label="Nome completo"
         fieldName="name"
         state={fields}
         setState={setFields}
+        input={{ autoFocus: true }}
       />
 
       <InputBlock
@@ -36,7 +37,11 @@ const SignUp: React.FC = () => {
         fieldName="email"
         state={fields}
         setState={setFields}
-        input={{ textContentType: "emailAddress" }}
+        input={{
+          textContentType: "emailAddress",
+          autoCapitalize: "none",
+          keyboardType: "email-address",
+        }}
       />
 
       <InputBlock
@@ -44,7 +49,10 @@ const SignUp: React.FC = () => {
         fieldName="password"
         state={fields}
         setState={setFields}
-        input={{ textContentType: "password", secureTextEntry: true }}
+        input={{
+          textContentType: "password",
+          secureTextEntry: true,
+        }}
       />
 
       <InputBlock
