@@ -27,6 +27,7 @@ interface IPost {
 
 const mockPosts: IPost[] = [
   {
+    id: "any_id_1",
     name: "Leonardo Santos",
     content:
       "Podemos já vislumbrar o modo pelo qual a execução dos pontos do programa nos obriga à análise das condições financeiras e administrativas exigidas. A certificação de metodologias que nos auxiliam a lidar com o surgimento do comércio virtual faz parte de um processo.",
@@ -34,6 +35,7 @@ const mockPosts: IPost[] = [
     isOwner: true,
   },
   {
+    id: "any_id_2",
     name: "John Doe",
     content:
       "É claro que a execução dos pontos do programa causa impacto indireto na reavaliação dos índices pretendidos.",
