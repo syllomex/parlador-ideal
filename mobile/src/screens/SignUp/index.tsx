@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import Button from "../../components/Button";
 import InputBlock from "../../components/InputBlock";
@@ -15,6 +16,8 @@ const SignUp: React.FC = () => {
     password: "",
     password_confirm: "",
   });
+
+  const { navigate } = useNavigation();
 
   return (
     <Wrapper>
@@ -64,7 +67,7 @@ const SignUp: React.FC = () => {
       />
 
       <ActionsContainer>
-        <Link>Já tenho uma conta</Link>
+        <Link onPress={() => navigate("SignIn")}>Já tenho uma conta</Link>
         <Button>Criar conta</Button>
       </ActionsContainer>
     </Wrapper>
