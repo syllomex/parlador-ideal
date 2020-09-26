@@ -1,6 +1,7 @@
+import React from "react";
+import { StatusBar as statusBar, Platform, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import React from "react";
 
 import { StackNavigator } from "./src/navigators/stack";
 
@@ -20,11 +21,15 @@ export default function App() {
 
   if (!fontsLoaded) return null;
 
+  const statusBarHeight = Platform.OS === "ios" ? 20 : statusBar.currentHeight;
+
   return (
     <React.Fragment>
+      <View style={{ height: statusBarHeight }} />
+
       <NavigationContainer>
         <StackNavigator />
-        <StatusBar style="auto" />
+        <StatusBar style="auto" backgroundColor="#fefefe" />
       </NavigationContainer>
     </React.Fragment>
   );
