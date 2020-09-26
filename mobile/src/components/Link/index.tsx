@@ -1,11 +1,11 @@
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, TouchableOpacityProps } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { color } from "../../assets/color";
 
-const Link: React.FC = ({ children }) => {
+const Link: React.FC<TouchableOpacityProps> = ({ children, ...props }) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity {...props}>
       <Text style={styles.link}>{children}</Text>
     </TouchableOpacity>
   );
