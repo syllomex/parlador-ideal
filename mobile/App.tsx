@@ -5,6 +5,8 @@ import { StatusBar } from "expo-status-bar";
 
 import { StackNavigator } from "./src/navigators/stack";
 
+import "moment/locale/pt-br";
+
 import {
   useFonts,
   Inter_300Light,
