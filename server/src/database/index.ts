@@ -26,4 +26,8 @@ async function connect(): Promise<void> {
   }
 }
 
-export { connect };
+async function disconnect() {
+  await mongoose.connection.close();
+}
+
+export { connect, disconnect };

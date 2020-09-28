@@ -1,4 +1,4 @@
-import { connect } from "../../database";
+import { connect, disconnect } from "../../database";
 import { Users } from "../../database/models/Users";
 import { User } from "../../entities/User";
 import { UserMongoRepository } from "../../repositories/implementations/UserMongoRepository";
@@ -17,7 +17,7 @@ describe("Test user entity and model integration", () => {
     password: "any_password",
   });
 
-  it("should check if the user instance was created with all it's properties", () => {
+  it("check if the user instance was created with all it's properties", () => {
     expect(user).toHaveProperty("id");
     expect(user).toHaveProperty("name");
     expect(user).toHaveProperty("email");
@@ -56,4 +56,6 @@ describe("Test user entity and model integration", () => {
     const result = await Users.deleteOne({ email: user.email });
     expect(result.deletedCount).toBe(1);
   });
+
+  disconnect();
 });
