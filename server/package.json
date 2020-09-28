@@ -1,0 +1,12 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node dist/server.js"
+  },
+  "author": "Leonardo Santos <leonardojdossantos@gmail.com>",
+  "license": "ISC"
+}

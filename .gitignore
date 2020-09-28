@@ -1,4 +1,5 @@
-mobile/node_modules/**/*
+**/node_modules
+
 mobile/.expo/*
 mobile/npm-debug.*
 mobile/*.jks
