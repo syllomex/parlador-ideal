@@ -10,6 +10,7 @@ class User {
     Object.assign(this, props);
 
     if (!id) this.id = uuid();
+    else this.id = id;
   }
 }
 
