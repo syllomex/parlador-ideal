@@ -4,8 +4,7 @@ import { IPayload, IPayloadRequires } from "./Payload";
 
 export class JWT implements IAdapter {
   constructor(private JWT_SECRET: string) {
-    if (JWT_SECRET === "")
-      throw new Error("empty jwt secret");
+    if (JWT_SECRET === "") throw new Error("empty jwt secret");
   }
 
   generateToken(data: IPayloadRequires): string {
@@ -14,10 +13,14 @@ export class JWT implements IAdapter {
   }
 
   decodeToken(token: string): IPayload {
-    const payload: any = jwt.verify(token, this.JWT_SECRET);
+    try {
+      const payload: any = jwt.verify(token, this.JWT_SECRET);
 
-    return {
-      ...payload,
-    };
+      return {
+        ...payload,
+      };
+    } catch (error) {
+      throw new Error(`error on decode token: ${error.message}`);
+    }
   }
 }
