@@ -52,6 +52,11 @@ describe("Test user entity and model integration", () => {
     });
   });
 
+  it('should return null when no user was found', async () => {
+    const found_user = await userRepo.findByEmail("not_registered_email")
+    expect(found_user).toBeNull();
+  });
+
   it("should delete the created user", async () => {
     const result = await Users.deleteOne({ email: user.email });
     expect(result.deletedCount).toBe(1);
