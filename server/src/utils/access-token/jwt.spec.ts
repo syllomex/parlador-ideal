@@ -12,7 +12,7 @@ describe("Test access token functions", () => {
 
   it("should generate an access token", () => {
     const accessToken = new AccessToken(new JWT("any_secret"));
-    const token = accessToken.generateToken({ id: "any_id" });
+    const token = accessToken.generateToken({ id: "any_id", name: "Any Name" });
     const matches = token.startsWith("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9");
     
     generated_token = token;

@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { IAdapter } from "./adapter";
-import { IPayload, IPayloadRequires } from "./Payload";
+import { IPayload, IPayloadRequires } from "./payload";
 
 export class JWT implements IAdapter {
   constructor(private JWT_SECRET: string) {

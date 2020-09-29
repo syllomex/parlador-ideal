@@ -1,6 +1,6 @@
 import { IAdapter } from "./adapter";
 import { JWT } from "./jwt";
-import { IPayload, IPayloadRequires } from "./Payload";
+import { IPayload, IPayloadRequires } from "./payload";
 
 require("dotenv").config();
 

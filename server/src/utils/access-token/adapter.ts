@@ -1,4 +1,4 @@
-import { IPayload, IPayloadRequires } from "./Payload";
+import { IPayload, IPayloadRequires } from "./payload";
 
 export interface IAdapter {
   generateToken(data: IPayloadRequires): string;
