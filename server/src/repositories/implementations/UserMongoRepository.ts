@@ -21,7 +21,7 @@ export class UserMongoRepository implements IUserRepository {
   async findByEmail(
     email: String,
     selectPassword?: boolean
-  ): Promise<User | Omit<User, "password"> | null> {
+  ): Promise<User | null> {
     let selectFields = ["_id", "email", "name"];
     if (selectPassword) selectFields.push("password");
 

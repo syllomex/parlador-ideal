@@ -5,5 +5,5 @@ export interface IUserRepository {
   findByEmail(
     email: string,
     selectPassword?: boolean
-  ): Promise<User | Omit<User, "password"> | null>;
+  ): Promise<User | null>;
 }
