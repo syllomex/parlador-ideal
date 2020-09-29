@@ -1,3 +1,8 @@
 export function missingParam(param: string) {
-  return new Error(`missing param: ${param}`)
+  const error = JSON.stringify({
+    code: 400,
+    message: `missing param: ${param}`,
+  });
+
+  return new Error(error);
 }
