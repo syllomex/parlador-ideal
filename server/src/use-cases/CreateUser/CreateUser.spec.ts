@@ -3,8 +3,9 @@ import { ICreateUserDTO } from "./CreateUserDTO";
 import { CreateUserUseCase } from "./CreateUserUseCase";
 
 import { missingParam } from "../../errors/MissingParam";
+import { IUserRepository } from "../../repositories/UserRepository";
 
-class MockRepo {
+class MockRepo implements IUserRepository {
   async create(user: User): Promise<Omit<User, "password">> {
     return { id: "any_id", email: user.email, name: user.name };
   }
