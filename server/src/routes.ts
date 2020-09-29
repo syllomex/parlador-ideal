@@ -1,8 +1,11 @@
 import { Request, Response, Router } from "express";
+import { isLogged } from "./middlewares/isLogged";
 const router = Router();
 
 import { IController } from "./protocols/controller";
+import { createPostController } from "./use-cases/CreatePost";
 import { createUserController } from "./use-cases/CreateUser";
+import { indexPostsController } from "./use-cases/IndexPosts";
 import { signInController } from "./use-cases/SignIn";
 
 async function sendRes(controller: IController, req: Request, res: Response) {
@@ -12,5 +15,8 @@ async function sendRes(controller: IController, req: Request, res: Response) {
 
 router.post("/auth", (req, res) => sendRes(signInController, req, res));
 router.post("/users", (req, res) => sendRes(createUserController, req, res));
+
+router.get("/posts", isLogged, (req, res) => sendRes(indexPostsController, req, res));
+router.post("/posts", isLogged, (req, res) => sendRes(createPostController, req, res));
 
 export { router };
