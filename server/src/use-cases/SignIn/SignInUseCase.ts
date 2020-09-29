@@ -1,3 +1,4 @@
+import { invalidParam } from "../../errors/InvalidParam";
 import { missingParam } from "../../errors/MissingParam";
 import { IUserRepository } from "../../repositories/UserRepository";
 import { IAdapter } from "../../utils/access-token/adapter";
@@ -20,7 +21,7 @@ export class SignInUseCase {
     if (!user) throw new Error("user not found");
 
     const valid_password = user.password === data.password;
-    if (!valid_password) throw new Error("invalid password");
+    if (!valid_password) throw invalidParam("password");
 
     const token = this.accessToken.generateToken({
       id: user.id,

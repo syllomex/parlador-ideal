@@ -1,4 +1,6 @@
 import { User } from "../../entities/User";
+import { invalidParam } from "../../errors/InvalidParam";
+import { missingParam } from "../../errors/MissingParam";
 import { IUserRepository } from "../../repositories/UserRepository";
 import { accessToken } from "../../utils/access-token";
 import { SignInUseCase } from "./SignInUseCase";
@@ -31,27 +33,27 @@ describe("Test sign in use case", () => {
 
   it("should sign in returnin access token and payload", async () => {
     const data = { email: "any_email", password: "correct_password" };
-    const {token, payload} = await usecase.execute(data);
+    const { token, payload } = await usecase.execute(data);
 
     expect(token).toBeDefined();
-    expect(payload).toHaveProperty("id", "any_id")
-    expect(payload).toHaveProperty("name", "any name")
-    expect(payload).toHaveProperty("iat")
-    expect(payload).toHaveProperty("exp")
+    expect(payload).toHaveProperty("id", "any_id");
+    expect(payload).toHaveProperty("name", "any name");
+    expect(payload).toHaveProperty("iat");
+    expect(payload).toHaveProperty("exp");
   });
 
   it("should throw missing param email", async () => {
     const data = { email: "", password: "any_password" };
     await expect(async () => {
       await usecase.execute(data);
-    }).rejects.toThrow(new Error("missing param: email"));
+    }).rejects.toThrow(missingParam("email"));
   });
 
   it("should throw missing param password", async () => {
     const data = { email: "any_email", password: "" };
     await expect(async () => {
       await usecase.execute(data);
-    }).rejects.toThrow(new Error("missing param: password"));
+    }).rejects.toThrow(missingParam("password"));
   });
 
   it("should throw user not found", async () => {
@@ -65,6 +67,6 @@ describe("Test sign in use case", () => {
     const data = { email: "any_email", password: "wrong_password" };
     await expect(async () => {
       await usecase.execute(data);
-    }).rejects.toThrow(new Error("invalid password"));
+    }).rejects.toThrow(invalidParam("password"));
   });
 });
