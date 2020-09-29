@@ -6,7 +6,7 @@ export class PostMongoRepository implements IPostRepository {
   async index(): Promise<Post[]> {
     const posts: any = await Posts.find()
       .select(["id", "content", "date", "user"])
-      .populate("user", ["id", "email", "name"])
+      .populate("user", ["id", "name"])
       .map((posts: any) =>
         posts.map((post: any) => ({
           id: post._id,
@@ -14,7 +14,6 @@ export class PostMongoRepository implements IPostRepository {
           date: post.date,
           user: {
             id: post.user._id,
-            email: post.user.email,
             name: post.user.name,
           },
         }))
@@ -33,8 +32,7 @@ export class PostMongoRepository implements IPostRepository {
       date: new_post.date,
       user: {
         id: new_post.user._id,
-        name: new_post.user.name,
-        email: new_post.user.email,
+        name: new_post.user.name
       },
     };
   }
@@ -54,8 +52,7 @@ export class PostMongoRepository implements IPostRepository {
       date: updated_post.date,
       user: {
         id: updated_post.user._id,
-        name: updated_post.user.name,
-        email: updated_post.user.email,
+        name: updated_post.user.name
       },
     };
   }

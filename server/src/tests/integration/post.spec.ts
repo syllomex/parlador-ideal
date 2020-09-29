@@ -34,7 +34,6 @@ describe("Name of the group", () => {
     date: post.date,
     user: {
       id: user.id,
-      email: user.email,
       name: user.name,
     },
   };
