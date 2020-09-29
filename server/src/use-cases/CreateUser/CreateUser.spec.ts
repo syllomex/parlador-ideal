@@ -4,6 +4,8 @@ import { CreateUserUseCase } from "./CreateUserUseCase";
 
 import { missingParam } from "../../errors/MissingParam";
 import { IUserRepository } from "../../repositories/UserRepository";
+import { invalidParam } from "../../errors/InvalidParam";
+import { duplicatedEntry } from "../../errors/Duplicated";
 
 class MockRepo implements IUserRepository {
   async create(user: User): Promise<Omit<User, "password">> {
@@ -13,7 +15,10 @@ class MockRepo implements IUserRepository {
   async findByEmail(
     email: string
   ): Promise<User | Omit<User, "password"> | null> {
-    return { id: "any_id", email: email, name: "any name" };
+    if (email === "registered_email")
+      return { id: "any_id", email: email, name: "any name" };
+
+    return null;
   }
 }
 
@@ -29,7 +34,7 @@ describe("Test create user use case", () => {
     };
 
     await expect(async () => await usecase.execute(data)).rejects.toThrow(
-      new Error("invalid param: password confirmation doesn't match")
+      invalidParam("password confirmation")
     );
   });
 
@@ -100,5 +105,18 @@ describe("Test create user use case", () => {
       email: "any_email",
       name: "Any Name",
     });
+  });
+
+  it("should throw user already exists", async () => {
+    const data: ICreateUserDTO = {
+      email: "registered_email",
+      name: "Any Name",
+      password: "any_password",
+      password_confirmation: "any_password",
+    };
+
+    await expect(async () => {
+      await usecase.execute(data);
+    }).rejects.toThrow(duplicatedEntry("email"));
   });
 });
