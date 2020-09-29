@@ -1,6 +1,8 @@
 **/node_modules
 **/yarn-error.log
 
+server/coverage
+
 mobile/.expo/*
 mobile/npm-debug.*
 mobile/*.jks
