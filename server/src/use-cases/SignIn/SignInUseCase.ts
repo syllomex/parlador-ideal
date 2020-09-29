@@ -1,3 +1,4 @@
+import { badRequest } from "../../errors/BadRequest";
 import { invalidParam } from "../../errors/InvalidParam";
 import { missingParam } from "../../errors/MissingParam";
 import { IUserRepository } from "../../repositories/UserRepository";
@@ -18,7 +19,7 @@ export class SignInUseCase {
     if (data.password === "" || !data.password) throw missingParam("password");
 
     const user = await this.repository.findByEmail(data.email, true);
-    if (!user) throw new Error("user not found");
+    if (!user) throw badRequest("user not found");
 
     const valid_password = user.password === data.password;
     if (!valid_password) throw invalidParam("password");
