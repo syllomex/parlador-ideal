@@ -7,7 +7,7 @@ class Post {
   public date!: Date;
   public content!: string;
 
-  public user!: string | Omit<User, "password">;
+  public user!: string | Omit<User, "password" | "email">;
 
   constructor(props: Omit<Post, "id">, id?: string) {
     Object.assign(this, props);
