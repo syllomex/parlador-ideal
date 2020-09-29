@@ -1,4 +1,5 @@
 import { User } from "../../entities/User";
+import { badRequest } from "../../errors/BadRequest";
 import { invalidParam } from "../../errors/InvalidParam";
 import { missingParam } from "../../errors/MissingParam";
 import { IUserRepository } from "../../repositories/UserRepository";
@@ -60,7 +61,7 @@ describe("Test sign in use case", () => {
     const data = { email: "not_registered_email", password: "any_password" };
     await expect(async () => {
       await usecase.execute(data);
-    }).rejects.toThrow(new Error("user not found"));
+    }).rejects.toThrow(badRequest("user not found"));
   });
 
   it("should throw invalid password", async () => {
