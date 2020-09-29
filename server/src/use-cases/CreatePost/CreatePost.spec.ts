@@ -15,6 +15,9 @@ const expected_post = {
 };
 
 export class MockRepo implements IPostRepository {
+  async findById(): Promise<Post> {
+    return expected_post;
+  }
   async create(post: Post): Promise<Post> {
     return expected_post;
   }
@@ -81,7 +84,7 @@ describe("Test create post use case", () => {
 
   it("should throw invalid param when content length is greater than 280", async () => {
     let content = "";
-    for(let i = 0; i < 281; i++) {
+    for (let i = 0; i < 281; i++) {
       content += "c";
     }
 

@@ -56,6 +56,16 @@ describe("Name of the group", () => {
     expect(created_post).toEqual(expected_response);
   });
 
+  it("should return the created post", async () => {
+    const created_post = await postRepo.findById(post.id);
+    expect(created_post).toEqual(expected_response);
+  });
+
+  it("should return null when post not found", async () => {
+    const created_post = await postRepo.findById("any unexistent id");
+    expect(created_post).toBeNull();
+  });
+
   it("should return a posts array", async () => {
     const posts = await postRepo.index();
 

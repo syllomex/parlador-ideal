@@ -3,6 +3,21 @@ import { Post } from "../../entities/Post";
 import { IPostRepository } from "../PostRepository";
 
 export class PostMongoRepository implements IPostRepository {
+  async findById(id: string): Promise<Post | null> {
+    const post: any = await Posts.findById(id)
+      .select(["id", "content", "date", "user"])
+      .populate("user", ["id", "name"]);
+      
+    if (!post) return null;
+
+    return {
+      id: post.id,
+      content: post.content,
+      date: post.date,
+      user: { id: post.user.id, name: post.user.name },
+    };
+  }
+
   async index(): Promise<Post[]> {
     const posts: any = await Posts.find()
       .select(["id", "content", "date", "user"])
@@ -32,7 +47,7 @@ export class PostMongoRepository implements IPostRepository {
       date: new_post.date,
       user: {
         id: new_post.user._id,
-        name: new_post.user.name
+        name: new_post.user.name,
       },
     };
   }
@@ -52,7 +67,7 @@ export class PostMongoRepository implements IPostRepository {
       date: updated_post.date,
       user: {
         id: updated_post.user._id,
-        name: updated_post.user.name
+        name: updated_post.user.name,
       },
     };
   }
