@@ -54,8 +54,28 @@ describe("Name of the group", () => {
     });
   });
 
+  it("should return a posts array", async () => {
+    const posts = await postRepo.index();
+
+    const expected = {
+      id: post.id,
+      content: post.content,
+      date: post.date,
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+      },
+    };
+
+    expect(posts).toEqual(
+      expect.arrayContaining([expect.objectContaining(expected)])
+    );
+  });
+
   it("should update created post content", async () => {
     const new_content = "any new content";
+
     const updated_post = await postRepo.update(new_content, post.id);
 
     expect(updated_post).toEqual({
@@ -68,6 +88,14 @@ describe("Name of the group", () => {
         name: user.name,
       },
     });
+  });
+
+  it("should throw when try to update post without content", async () => {
+    const new_content = "";
+
+    expect(async () => {
+      await postRepo.update(new_content, post.id);
+    }).rejects.toThrow();
   });
 
   it("should delete created post", async () => {

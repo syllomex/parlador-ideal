@@ -4,7 +4,22 @@ import { IPostRepository } from "../PostRepository";
 
 export class PostMongoRepository implements IPostRepository {
   async index(): Promise<Post[]> {
-    const posts: any = await Posts.find().populate("user");
+    const posts: any = await Posts.find()
+      .select(["id", "content", "date", "user"])
+      .populate("user", ["id", "email", "name"])
+      .map((posts: any) =>
+        posts.map((post: any) => ({
+          id: post._id,
+          content: post.content,
+          date: post.date,
+          user: {
+            id: post.user._id,
+            email: post.user.email,
+            name: post.user.name,
+          },
+        }))
+      );
+
     return posts;
   }
 
@@ -25,13 +40,13 @@ export class PostMongoRepository implements IPostRepository {
   }
 
   async update(content: string, post_id: string): Promise<Post> {
+    if (content.length === 0) throw new Error("can not update post");
+
     const updated_post: any = await Posts.findByIdAndUpdate(
       post_id,
       { content },
       { new: true }
     ).populate("user");
-
-    if (!updated_post) throw new Error("can not update post");
 
     return {
       id: updated_post._id,
@@ -46,6 +61,6 @@ export class PostMongoRepository implements IPostRepository {
   }
 
   async remove(post_id: string): Promise<void> {
-    const result = await Posts.findByIdAndRemove(post_id);
+    await Posts.findByIdAndRemove(post_id);
   }
 }
