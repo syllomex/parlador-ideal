@@ -1,3 +1,4 @@
+require("dotenv").config();
 import { connect, disconnect } from "../../database";
 import { Users } from "../../database/models/Users";
 import { User } from "../../entities/User";

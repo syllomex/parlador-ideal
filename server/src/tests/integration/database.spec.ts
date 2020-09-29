@@ -1,8 +1,12 @@
+require("dotenv").config();
 import { connect, disconnect } from "../../database";
 
 describe("Test mongodb connection", () => {
+  const OLD_ENV = process.env;
+
   it("should connect to mongo cloud database", async () => {
     process.env.NODE_ENV = "development";
+
     const response = await connect();
     expect(response).toBeUndefined();
   });
@@ -13,9 +17,14 @@ describe("Test mongodb connection", () => {
   });
 
   it("should thrown when mongo uri is undefined", async () => {
-    process.env.NODE_ENV = undefined;
+    jest.resetModules();
+
     expect(async () => {
-      connect();
-    }).rejects.toThrow();
+      await connect();
+    }).rejects.toThrow("missing MONGO_URI environment variable");
+  });
+
+  afterAll(() => {
+    process.env = OLD_ENV;
   });
 });

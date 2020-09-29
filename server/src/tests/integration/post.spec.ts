@@ -1,3 +1,4 @@
+require("dotenv").config();
 import { connect, disconnect } from "../../database";
 import { Users } from "../../database/models/Users";
 import { Post } from "../../entities/Post";
@@ -27,6 +28,17 @@ describe("Name of the group", () => {
     user: user.id,
   });
 
+  const expected_response = {
+    id: post.id,
+    content: post.content,
+    date: post.date,
+    user: {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+    },
+  };
+
   it("create a user for posts tests", async () => {
     await userRepo.create(user);
   });
@@ -42,34 +54,14 @@ describe("Name of the group", () => {
   it("should insert post on database returning the created post", async () => {
     const created_post = await postRepo.create(post);
 
-    expect(created_post).toEqual({
-      id: post.id,
-      content: post.content,
-      date: post.date,
-      user: {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-      },
-    });
+    expect(created_post).toEqual(expected_response);
   });
 
   it("should return a posts array", async () => {
     const posts = await postRepo.index();
 
-    const expected = {
-      id: post.id,
-      content: post.content,
-      date: post.date,
-      user: {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-      },
-    };
-
     expect(posts).toEqual(
-      expect.arrayContaining([expect.objectContaining(expected)])
+      expect.arrayContaining([expect.objectContaining(expected_response)])
     );
   });
 
@@ -79,14 +71,8 @@ describe("Name of the group", () => {
     const updated_post = await postRepo.update(new_content, post.id);
 
     expect(updated_post).toEqual({
-      id: post.id,
+      ...expected_response,
       content: new_content,
-      date: post.date,
-      user: {
-        id: user.id,
-        email: user.email,
-        name: user.name,
-      },
     });
   });
 
