@@ -10,6 +10,7 @@ import { createPostController } from "./use-cases/CreatePost";
 import { createUserController } from "./use-cases/CreateUser";
 import { indexPostsController } from "./use-cases/IndexPosts";
 import { removePostController } from "./use-cases/RemovePost";
+import { updatePostController } from "./use-cases/UpdatePost";
 
 async function sendRes(controller: IController, req: Request, res: Response) {
   const { code, body } = await controller.handle(req);
@@ -21,6 +22,7 @@ router.post("/users", (req, res) => sendRes(createUserController, req, res));
 
 router.get("/posts", isLogged, (req, res) => sendRes(indexPostsController, req, res));
 router.post("/posts", isLogged, (req, res) => sendRes(createPostController, req, res));
+router.put("/posts/:id", isLogged, (req, res) => sendRes(updatePostController, req, res));
 router.delete("/posts/:id", isLogged, (req, res) => sendRes(removePostController, req, res));
 
 export { router };
