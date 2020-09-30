@@ -25,6 +25,8 @@ const EditPost: React.FC = () => {
   }).handler;
 
   async function handleSubmit() {
+    if (content === "") return;
+    
     try {
       await api.put(
         "/posts/" + params.id,

@@ -17,6 +17,8 @@ const NewPost: React.FC = () => {
   const [content, setContent] = useState("");
 
   async function handleSubmit() {
+    if (content === "") return;
+    
     try {
       await api.post(
         "/posts",
