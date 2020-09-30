@@ -3,6 +3,7 @@ import { User } from "../../entities/User";
 import { ICreateUserDTO } from "./CreateUserDTO";
 import { CreateUserUseCase } from "./CreateUserUseCase";
 import { IUserRepository } from "../../repositories/UserRepository";
+import { crypt } from "../../utils/hash";
 
 class MockRepo implements IUserRepository {
   async create(user: User): Promise<Omit<User, "password">> {
@@ -20,7 +21,7 @@ class MockRepo implements IUserRepository {
 }
 
 describe("Test create user use case", () => {
-  const usecase = new CreateUserUseCase(new MockRepo());
+  const usecase = new CreateUserUseCase(new MockRepo(), crypt);
 
   it("should throw invalid password confirmation", async () => {
     const data: ICreateUserDTO = {
