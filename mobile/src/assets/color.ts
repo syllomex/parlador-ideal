@@ -9,5 +9,6 @@ export const color = {
   light: "#FFF",
   placeholder_in_primary: "#555555",
   link: "#6FA8FF",
+  danger: "#E53",
   line: "#767676",
 };
