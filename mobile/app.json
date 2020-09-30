@@ -13,11 +13,14 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "com.leonardosantos.parladorideal"
+    },
+    "android": {
+      "package": "com.leonardosantos.parladorideal",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
