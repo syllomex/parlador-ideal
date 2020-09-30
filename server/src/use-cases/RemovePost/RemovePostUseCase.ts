@@ -1,5 +1,4 @@
-import { badRequest } from "../../errors/BadRequest";
-import { unauthorized } from "../../errors/Unauthorized";
+import { badRequest, unauthorized } from "../../errors";
 import { IPostRepository } from "../../repositories/PostRepository";
 
 export class RemovePostUseCase {

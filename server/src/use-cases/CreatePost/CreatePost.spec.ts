@@ -1,6 +1,5 @@
+import { missingParam, invalidParam } from "../../errors";
 import { Post } from "../../entities/Post";
-import { invalidParam } from "../../errors/InvalidParam";
-import { missingParam } from "../../errors/MissingParam";
 import { IPostRepository } from "../../repositories/PostRepository";
 import { CreatePostUseCase } from "./CreatePostUseCase";
 

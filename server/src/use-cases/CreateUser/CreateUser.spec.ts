@@ -1,11 +1,8 @@
+import { missingParam, invalidParam, duplicatedEntry } from "../../errors";
 import { User } from "../../entities/User";
 import { ICreateUserDTO } from "./CreateUserDTO";
 import { CreateUserUseCase } from "./CreateUserUseCase";
-
-import { missingParam } from "../../errors/MissingParam";
 import { IUserRepository } from "../../repositories/UserRepository";
-import { invalidParam } from "../../errors/InvalidParam";
-import { duplicatedEntry } from "../../errors/Duplicated";
 
 class MockRepo implements IUserRepository {
   async create(user: User): Promise<Omit<User, "password">> {

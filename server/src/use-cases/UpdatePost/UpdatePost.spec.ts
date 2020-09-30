@@ -1,9 +1,11 @@
-import { badRequest } from "../../errors/BadRequest";
-import { invalidParam } from "../../errors/InvalidParam";
-import { missingParam } from "../../errors/MissingParam";
-import { unauthorized } from "../../errors/Unauthorized";
 import { MockRepo } from "../CreatePost/CreatePost.spec";
 import { UpdatePostUseCase } from "./UpdatePostUseCase";
+import {
+  badRequest,
+  invalidParam,
+  missingParam,
+  unauthorized,
+} from "../../errors";
 
 describe("Test update post use case", () => {
   const useCase = new UpdatePostUseCase(new MockRepo());

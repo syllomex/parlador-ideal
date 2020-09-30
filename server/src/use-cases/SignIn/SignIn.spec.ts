@@ -1,7 +1,5 @@
 import { User } from "../../entities/User";
-import { badRequest } from "../../errors/BadRequest";
-import { invalidParam } from "../../errors/InvalidParam";
-import { missingParam } from "../../errors/MissingParam";
+import { badRequest, invalidParam, missingParam } from "../../errors";
 import { IUserRepository } from "../../repositories/UserRepository";
 import { accessToken } from "../../utils/access-token";
 import { SignInUseCase } from "./SignInUseCase";

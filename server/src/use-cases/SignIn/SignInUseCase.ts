@@ -1,10 +1,8 @@
-import { badRequest } from "../../errors/BadRequest";
-import { invalidParam } from "../../errors/InvalidParam";
-import { missingParam } from "../../errors/MissingParam";
 import { IUserRepository } from "../../repositories/UserRepository";
 import { IAdapter } from "../../utils/access-token/adapter";
 import { IPayload } from "../../utils/access-token/payload";
 import { ISignInDTO } from "./SignInDTO";
+import { badRequest, invalidParam, missingParam } from "../../errors";
 
 export class SignInUseCase {
   constructor(

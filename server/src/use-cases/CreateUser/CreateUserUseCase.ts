@@ -1,7 +1,5 @@
+import { missingParam, invalidParam, duplicatedEntry } from "../../errors";
 import { User } from "../../entities/User";
-import { duplicatedEntry } from "../../errors/Duplicated";
-import { invalidParam } from "../../errors/InvalidParam";
-import { missingParam } from "../../errors/MissingParam";
 import { IUserRepository } from "../../repositories/UserRepository";
 import { ICreateUserDTO } from "./CreateUserDTO";
 
@@ -22,7 +20,7 @@ export class CreateUserUseCase {
     });
 
     if (data.password !== data.password_confirmation)
-      throw invalidParam("password confirmation")
+      throw invalidParam("password confirmation");
 
     const already_exits = await this.repository.findByEmail(data.email);
 
