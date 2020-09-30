@@ -18,6 +18,6 @@ export const ActionsContainer = styled.View`
   align-items: center;
   justify-content: space-between;
 
-  height: 68px;
+  height: 130px;
   margin-top: 48px;
 `;
