@@ -7,7 +7,7 @@ export class PostMongoRepository implements IPostRepository {
     const post: any = await Posts.findById(id)
       .select(["id", "content", "date", "user"])
       .populate("user", ["id", "name"]);
-      
+
     if (!post) return null;
 
     return {
@@ -22,6 +22,7 @@ export class PostMongoRepository implements IPostRepository {
     const posts: any = await Posts.find()
       .select(["id", "content", "date", "user"])
       .populate("user", ["id", "name"])
+      .sort({ date: "desc" })
       .map((posts: any) =>
         posts.map((post: any) => ({
           id: post._id,
