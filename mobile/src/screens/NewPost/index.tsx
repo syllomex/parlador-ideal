@@ -1,21 +1,33 @@
 import { useNavigation } from "@react-navigation/native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "../../components/Button";
 import EditablePostCard from "../../components/EditablePostCard";
 import Link from "../../components/Link";
 import Title from "../../components/Title";
 import Wrapper from "../../components/Wrapper";
+import { useProfile } from "../../contexts/profile";
+import { api } from "../../services/api";
 
 import { ActionsContainer, Container, TitleContainer } from "./styles";
 
 const NewPost: React.FC = () => {
+  const { profile } = useProfile();
   const { navigate } = useNavigation();
 
   const [content, setContent] = useState("");
 
-  useEffect(() => {
-    // TODO: send content to API
-  }, [content]);
+  async function handleSubmit() {
+    try {
+      await api.post(
+        "/posts",
+        { content },
+        { headers: { Authorization: `Bearer ${profile?.token}` } }
+      );
+      navigate("Posts");
+    } catch (error) {
+      console.log(error.response.status, error.response.data.message);
+    }
+  }
 
   return (
     <Wrapper>
@@ -29,7 +41,7 @@ const NewPost: React.FC = () => {
         <EditablePostCard name="Leonardo Santos" onChangeContent={setContent} />
 
         <ActionsContainer>
-          <Button>Publicar</Button>
+          <Button onPress={handleSubmit}>Publicar</Button>
           <Link onPress={() => navigate("Posts")}>Voltar</Link>
         </ActionsContainer>
       </Container>
