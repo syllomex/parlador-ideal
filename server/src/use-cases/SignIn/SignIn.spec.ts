@@ -2,6 +2,7 @@ import { User } from "../../entities/User";
 import { badRequest, invalidParam, missingParam } from "../../errors";
 import { IUserRepository } from "../../repositories/UserRepository";
 import { accessToken } from "../../utils/access-token";
+import { crypt } from "../../utils/hash";
 import { SignInUseCase } from "./SignInUseCase";
 
 class MockRepo implements IUserRepository {
@@ -20,7 +21,7 @@ class MockRepo implements IUserRepository {
         id: "any_id",
         email: email,
         name: "any name",
-        password: "correct_password",
+        password: "$2b$10$YVha4fkN8ZUOS0MzFPxT5.9SXv5BLLhDZUsS.VzFjz.CzEJ486H42",
       };
 
     return { id: "any_id", email: email, name: "any name" };
@@ -28,7 +29,7 @@ class MockRepo implements IUserRepository {
 }
 
 describe("Test sign in use case", () => {
-  const usecase = new SignInUseCase(new MockRepo(), accessToken());
+  const usecase = new SignInUseCase(new MockRepo(), accessToken(), crypt);
 
   it("should sign in returnin access token and payload", async () => {
     const data = { email: "any_email", password: "correct_password" };
