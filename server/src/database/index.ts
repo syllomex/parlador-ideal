@@ -14,7 +14,6 @@ async function connect(): Promise<void> {
   if (!MONGO_URI) throw new Error("missing MONGO_URI environment variable");
 
   await mongoose.connect(MONGO_URI, mongo_options);
-  console.log("connected to mongodb");
 }
 
 async function disconnect() {

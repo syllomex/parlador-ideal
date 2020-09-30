@@ -18,13 +18,15 @@ describe("Test mongodb connection", () => {
 
   it("should thrown when mongo uri is undefined", async () => {
     jest.resetModules();
+    process.env.MONGO_URI = "";
 
     expect(async () => {
       await connect();
-    }).rejects.toThrow("missing MONGO_URI environment variable");
+    }).rejects.toThrow(new Error("missing MONGO_URI environment variable"));
   });
 
   afterAll(() => {
+    disconnect();
     process.env = OLD_ENV;
   });
 });
