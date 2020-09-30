@@ -1,7 +1,9 @@
 import styled from "styled-components/native";
-import { TouchableOpacityProps } from "react-native";
-
-import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import {
+  TouchableOpacityProps,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 
 import sign_out from "../../assets/images/icons/sign_out.png";
 import new_post from "../../assets/images/icons/new_post.png";
@@ -29,5 +31,16 @@ export const NewPostIcon = styled.Image.attrs({ source: new_post })`
 
 export const PostsContainer = styled(ScrollView)`
   width: 100%;
+  padding: 0 10%;
   margin-top: 32px;
+`;
+
+export const AlertPrimary = styled.Text`
+  text-align: center;
+  color: ${color.primary};
+`;
+
+export const AlertSecondary = styled.Text`
+  text-align: center;
+  color: ${color.text_muted};
 `;

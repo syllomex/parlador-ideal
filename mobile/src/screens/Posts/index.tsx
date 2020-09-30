@@ -16,8 +16,11 @@ import {
   NewPostIcon,
   SignOutIcon,
   PostsContainer,
+  AlertSecondary,
 } from "./styles";
+
 import { api } from "../../services/api";
+import { RefreshControl, View } from "react-native";
 
 interface IPost {
   id?: string;
@@ -30,9 +33,11 @@ interface IPost {
 const Posts: React.FC = () => {
   const { profile, setProfile } = useProfile();
 
+  const [refreshing, setRefreshing] = useState(false);
   const [posts, setPosts] = useState<IPost[]>([]);
 
   async function fetchPosts() {
+    setRefreshing(true);
     try {
       const response = await api.get("/posts", {
         headers: { Authorization: `Bearer ${profile?.token}` },
@@ -41,6 +46,7 @@ const Posts: React.FC = () => {
     } catch (error) {
       console.log(error.response.status, error.response.data);
     }
+    setRefreshing(false);
   }
 
   const { navigate } = useNavigation();
@@ -59,6 +65,10 @@ const Posts: React.FC = () => {
     }, [])
   );
 
+  const onRefresh = useCallback(async () => {
+    await fetchPosts();
+  }, []);
+
   const Header: React.FC = () => {
     return (
       <StyledHeader>
@@ -76,8 +86,19 @@ const Posts: React.FC = () => {
   };
 
   return (
-    <Wrapper fixedHeader={<Header />}>
-      <PostsContainer>
+    <Wrapper refreshable fixedHeader={<Header />}>
+      <PostsContainer
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
+        {posts.length === 0 && (
+          <View style={{ marginTop: 80 }}>
+            <AlertSecondary>
+              Nenhuma publicação!{"\n\n"}Arraste para baixo para atualizar.
+            </AlertSecondary>
+          </View>
+        )}
         {posts.map((post: any) => (
           <PostCard
             key={post.id}
@@ -88,6 +109,9 @@ const Posts: React.FC = () => {
             isOwner={post.user?.id === profile?.payload.id}
           />
         ))}
+        {posts.length > 0 && (
+          <AlertSecondary>Essas são todas as publicações :)</AlertSecondary>
+        )}
       </PostsContainer>
     </Wrapper>
   );

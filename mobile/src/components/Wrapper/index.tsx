@@ -1,21 +1,38 @@
 import React from "react";
-import { ScrollViewProps, StyleSheet, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import {
+  ScrollView,
+  SafeAreaView,
+  ScrollViewProps,
+  StyleSheet,
+} from "react-native";
 import { color } from "../../assets/color";
 
 interface IProps extends ScrollViewProps {
   fixedHeader?: React.ReactNode;
+  refreshable?: boolean;
 }
 
-const Wrapper: React.FC<IProps> = ({ fixedHeader, children }) => {
+const Wrapper: React.FC<IProps> = ({
+  refreshControl,
+  fixedHeader,
+  children,
+  refreshable,
+}) => {
   return (
     <React.Fragment>
-      {fixedHeader && fixedHeader}
-      <View style={styles.view}>
-        <ScrollView contentContainerStyle={styles.scrollView}>
+      <SafeAreaView style={styles.view}>
+        {fixedHeader && fixedHeader}
+
+        <ScrollView
+          refreshControl={refreshControl}
+          contentContainerStyle={[
+            styles.scrollView,
+            refreshable ? { flex: 1 } : { paddingHorizontal: "10%" },
+          ]}
+        >
           {children}
         </ScrollView>
-      </View>
+      </SafeAreaView>
     </React.Fragment>
   );
 };
@@ -26,10 +43,9 @@ const styles = StyleSheet.create({
     backgroundColor: color.background,
   },
   scrollView: {
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
     backgroundColor: color.background,
-    paddingHorizontal: "10%",
   },
 });
 
