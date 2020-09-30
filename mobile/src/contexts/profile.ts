@@ -17,34 +17,27 @@ interface IProfile {
 }
 
 function ProfileProvider() {
-  console.log("[profile provider] running provider")
   const [profile, setProfile] = useState<IProfile | null | undefined>();
 
   if (profile === null) {
-    console.log("[profile provider] profile is null")
     return { profile, setProfile };
   }
 
   if (profile) {
-    console.log("[profile provider] profile exists. saving on storage")
     AsyncStorage.setItem("profile", JSON.stringify(profile));
     return { profile, setProfile };
   }
 
   if (profile === undefined) {
-    console.log("[profile provider] profile is undefined")
     AsyncStorage.getItem("profile").then((value) => {
-      console.log("[profile provider] profile found in storage")
       if (value) setProfile(JSON.parse(value));
       return { profile, setProfile };
     });
 
-    console.log("[profile provider] profile not found. setting null")
     setProfile(null);
     return { profile, setProfile };
   }
 
-  console.log("[profile provider] returning")
   return { profile, setProfile };
 }
 
