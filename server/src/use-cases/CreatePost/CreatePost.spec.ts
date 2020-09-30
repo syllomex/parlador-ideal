@@ -15,7 +15,17 @@ const expected_post = {
 };
 
 export class MockRepo implements IPostRepository {
-  async findById(): Promise<Post> {
+  async findById(id: string): Promise<Post | null> {
+    if (id === "unexistent_id") return null;
+
+    if (id === "malformed")
+      return {
+        id: "any_id",
+        content: "any_content",
+        date: new Date("2020-09-29"),
+        user: "malformed_user",
+      };
+
     return expected_post;
   }
   async create(post: Post): Promise<Post> {
@@ -39,7 +49,7 @@ export class MockRepo implements IPostRepository {
 
     return post;
   }
-  async remove(): Promise<void> {}
+  async remove(id: string): Promise<void> {}
 }
 
 describe("Test create post use case", () => {
