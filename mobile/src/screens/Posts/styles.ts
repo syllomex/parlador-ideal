@@ -43,4 +43,5 @@ export const AlertPrimary = styled.Text`
 export const AlertSecondary = styled.Text`
   text-align: center;
   color: ${color.text_muted};
+  margin-bottom: 24px;
 `;
