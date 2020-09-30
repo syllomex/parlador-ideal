@@ -28,5 +28,6 @@ export const NewPostIcon = styled.Image.attrs({ source: new_post })`
 `;
 
 export const PostsContainer = styled(ScrollView)`
+  width: 100%;
   margin-top: 32px;
 `;
