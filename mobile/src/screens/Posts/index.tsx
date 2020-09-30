@@ -17,6 +17,7 @@ import {
   SignOutIcon,
   PostsContainer,
 } from "./styles";
+import { api } from "../../services/api";
 
 interface IPost {
   id?: string;
@@ -26,32 +27,20 @@ interface IPost {
   isOwner: boolean;
 }
 
-const mockPosts: IPost[] = [
-  {
-    id: "any_id_1",
-    name: "Leonardo Santos",
-    content:
-      "Podemos já vislumbrar o modo pelo qual a execução dos pontos do programa nos obriga à análise das condições financeiras e administrativas exigidas. A certificação de metodologias que nos auxiliam a lidar com o surgimento do comércio virtual faz parte de um processo.",
-    date: new Date(),
-    isOwner: true,
-  },
-  {
-    id: "any_id_2",
-    name: "John Doe",
-    content:
-      "É claro que a execução dos pontos do programa causa impacto indireto na reavaliação dos índices pretendidos.",
-    date: new Date(),
-    isOwner: false,
-  },
-];
-
 const Posts: React.FC = () => {
-  const { setProfile } = useProfile();
+  const { profile, setProfile } = useProfile();
 
   const [posts, setPosts] = useState<IPost[]>([]);
 
   async function fetchPosts() {
-    setPosts(mockPosts);
+    try {
+      const response = await api.get("/posts", {
+        headers: { Authorization: `Bearer ${profile?.token}` },
+      });
+      setPosts(response.data);
+    } catch (error) {
+      console.log(error.response.status, error.response.data);
+    }
   }
 
   const { navigate } = useNavigation();
@@ -61,7 +50,7 @@ const Posts: React.FC = () => {
     setProfile(null);
     navigate("SignIn");
   }
-  
+
   const handlePressLogout = logoutHandler(logout).handler;
 
   useFocusEffect(
@@ -93,10 +82,10 @@ const Posts: React.FC = () => {
           <PostCard
             key={post.id}
             id={post.id}
-            name={post.name}
+            name={post.user?.name}
             content={post.content}
             date={post.date}
-            isOwner={post.isOwner}
+            isOwner={post.user?.id === profile?.payload.id}
           />
         ))}
       </PostsContainer>
