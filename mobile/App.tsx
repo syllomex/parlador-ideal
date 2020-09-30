@@ -2,8 +2,9 @@ import React from "react";
 import { StatusBar as statusBar, Platform, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-
 import { StackNavigator } from "./src/navigators/stack";
+
+import { ProfileContext, ProfileProvider } from "./src/contexts/profile";
 
 import "moment/locale/pt-br";
 
@@ -15,6 +16,8 @@ import {
 } from "@expo-google-fonts/inter";
 
 export default function App() {
+  const { profile, setProfile } = ProfileProvider();
+
   let [fontsLoaded] = useFonts({
     Inter_300Light,
     Inter_400Regular,
@@ -27,12 +30,14 @@ export default function App() {
 
   return (
     <React.Fragment>
-      <View style={{ height: statusBarHeight }} />
+      <ProfileContext.Provider value={{ profile, setProfile }}>
+        <View style={{ height: statusBarHeight }} />
 
-      <NavigationContainer>
-        <StackNavigator />
-        <StatusBar style="auto" backgroundColor="#fefefe" />
-      </NavigationContainer>
+        <NavigationContainer>
+          <StackNavigator />
+          <StatusBar style="auto" backgroundColor="#fefefe" />
+        </NavigationContainer>
+      </ProfileContext.Provider>
     </React.Fragment>
   );
 }
