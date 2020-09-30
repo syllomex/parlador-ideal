@@ -4,6 +4,7 @@ export interface HttpRequest {
   body?: any;
   headers?: any;
   payload: IPayload;
+  params?: any;
 }
 
 export interface HttpResponse {
