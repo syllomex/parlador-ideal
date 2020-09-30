@@ -6,7 +6,7 @@
   "scripts": {
     "test": "NODE_ENV=development jest --watch --runInBand --detectOpenHandles",
     "test:coverage": "NODE_ENV=development jest --runInBand --collect-coverage --watchAll --no-cache --silent",
-    "start": "ts-node src/server.ts",
+    "start": "node dist/server.js",
     "build": "npx typescript",
     "dev": "NODE_ENV=development ts-node-dev --files --respawn --transpile-only --ignore-watch node_modules src/server.ts"
   },
