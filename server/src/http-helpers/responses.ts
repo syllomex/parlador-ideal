@@ -13,3 +13,9 @@ export function created(body?: any): HttpResponse {
     body,
   };
 }
+
+export function nocontent(): HttpResponse {
+  return {
+    code: 204,
+  };
+}
