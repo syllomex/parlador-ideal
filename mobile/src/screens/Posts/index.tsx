@@ -1,10 +1,12 @@
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import React, { useCallback, useState } from "react";
+import AsyncStorage from "@react-native-community/async-storage";
 
 import PostCard from "../../components/PostCard";
 import Title from "../../components/Title";
 import { IconsContainer } from "../../components/Title/styles";
 import Wrapper from "../../components/Wrapper";
+import { useProfile } from "../../contexts/profile";
 
 import { logoutHandler } from "../../handlers/logout";
 
@@ -44,6 +46,8 @@ const mockPosts: IPost[] = [
 ];
 
 const Posts: React.FC = () => {
+  const { setProfile } = useProfile();
+
   const [posts, setPosts] = useState<IPost[]>([]);
 
   async function fetchPosts() {
@@ -51,9 +55,13 @@ const Posts: React.FC = () => {
   }
 
   const { navigate } = useNavigation();
+
   function logout() {
+    AsyncStorage.removeItem("profile");
+    setProfile(null);
     navigate("SignIn");
   }
+  
   const handlePressLogout = logoutHandler(logout).handler;
 
   useFocusEffect(
