@@ -2,6 +2,7 @@
 **/yarn-error.log
 **/.env
 
+server/dist
 server/coverage
 
 mobile/.expo/*
