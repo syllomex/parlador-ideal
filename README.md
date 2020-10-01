@@ -8,7 +8,8 @@
 <img src="https://img.shields.io/badge/%3C%2F%3E-TypeScript-blue" alt="TypeScript badge" />
 <br>
 <br>
-<span>Projeto desenvolvido para processo seletivo da <strong>Equipe Codificar</strong></span>
+<span>Projeto desenvolvido para processo seletivo da <strong>Equipe Codificar</strong></span><br>
+  <a href="https://drive.google.com/file/d/113WvzzoXR6-uSNYr6nTVcaeYnwtBufHY/view?usp=sharing">Baixar APK</a>
 </div>
 
 ## :page_facing_up: Descrição
