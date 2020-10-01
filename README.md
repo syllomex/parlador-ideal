@@ -17,6 +17,10 @@
 ## :page_facing_up: Descrição
 O **Parlador Ideal** é uma ferramenta de microblogging para compartilhamento de ideias, pensamentos e projetos pessoais.
 
+<div align="center">
+  <img src="https://media2.giphy.com/media/v1hPtJnqDQ7AnqkUVO/giphy.gif" />
+</div>
+
 ## :wrench: Requisitos
 - É **necessário** ter o [Docker](https://docs.docker.com/get-docker/) instalado.
 - É **necessário** ter o [Node](https://nodejs.org/en/download/) instalado.
